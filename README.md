@@ -1,16 +1,42 @@
-# Google Analytics plugin for Cordova 2.2.0 on iOS
+# Google Analytics plugin for Cordova 2.5.0 on iOS
 ====================
-A iOS Google Analytics SDK 2.0 plugin for Cordova 2.2+
+A iOS Google Analytics SDK 2.0 plugin for Cordova 2.5+
 
 Setup:
 ---------------------
-1. Add the SystemConfiguration and CoreData frameworks to Xcode.
-2. Open your Cordova.plist file add a new entry under Plugins with the key as googleAnalyticsPlugin (note the lower case g) and the value as GoogleAnalyticsPlugin. Then under ExternalHosts add a new entry with a value of *
-3. Drag and drop the GoogleAnalytics folder onto your Plugins folder in Xcode. Select 'Copy items into destination group's folder (if needed)', select 'Create groups for any added folders', and check your target under 'Add to targets'.
-4. Reference your cordova.js file and the GoogleAnalyticsPlugin.js in your html. To use, wrap the window.GA methods inside of an onDeviceReady function.
+1) To install the plugin, move GoogleAnalyticsPlugin.js to your project's www folder and include a reference to it in your html file after cordova.js.
+2) Drag and drop the 'GoogleAnalytics' folder to the 'Plugins' folder in Xcode
+3) Install the 'CoreData' and 'SystemConfigration' libraries/frameworks if not already installed. This can be accomplished by opening the project editor and selecting the projects target. At the top of the project editor, click 'Build Phases'. Open the 'Link Binary With Libraries section'. Press the Add (+) button and search for 'CoreData' and 'SystemConfigration' libraries/frameworks. If they are not already included in your project, ensure to add them. See this for further information: http://developer.apple.com/library/mac/#recipes/xcode_help-project_editor/Articles/AddingaLibrarytoaTarget.html
+4) In your config.xml add the following mapping to the <plugins> key:
+<pre>
+<code>
+<plugin name="googleAnalyticsPlugin" value="GoogleAnalyticsPlugin" />
+</code>
+</pre>
+
+Also, add the following mapping to the <widget> key:
+<pre>
+<code>
+<access origin="*" />
+</code>
+</pre>
+
+Overall the config.xml should have the following entries:
+<pre>
+<code>
+<widget>
+    <plugins>
+        <plugin name="googleAnalyticsPlugin" value="GoogleAnalyticsPlugin" />
+    </plugins>
+    <access origin="*" />
+</widget>
+</code>
+</pre>
 
 Example:
 ---------------------
+<pre>
+<code>
 	<script type="text/javascript">
 		document.addEventListener("deviceready", onDeviceReady, false);
 		function onDeviceReady() {
@@ -18,10 +44,8 @@ Example:
 			window.GA.trackView("/index");
 		}
 	</script>
-
-More details:
----------------------
-For a more detailed guide see http://jelled.com/google-analytics-plugin-for-phonegap-cordova-2-2-0-ios
+</code>
+</pre>
 
 Credit:
 ---------------------
